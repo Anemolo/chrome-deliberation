@@ -21,3 +21,5 @@ TODO:
 - Reset on new day
 - Can add current website to deliberate
 - Can see the list of websites added
+- Reduce time options for concurrent sessions
+- Different types of blocks for different websites
