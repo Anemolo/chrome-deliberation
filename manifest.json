@@ -1,0 +1,12 @@
+{
+  "manifest_version": 2,
+  "name": "Deliberate",
+  "description": "An time tracker based around beign deliberate of what you do.",
+  "version": "0.1",
+  "author": "Daniel Velasquez",
+  "background": {
+    "scripts": ["utils.js", "background.js"],
+    "persistent": false
+  },
+  "permissions": ["tabs"]
+}
