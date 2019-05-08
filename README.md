@@ -10,16 +10,42 @@ https://developers.chrome.com/extensions/storage
 
 // https://medium.freecodecamp.org/how-to-create-and-publish-a-chrome-extension-in-20-minutes-6dc8395d7153
 
+TESTING:
+https://github.com/pureooze/extension-testing-example
+Chrome mock https://github.com/acvetkov/sinon-chrome
 TODO:
 
 - Use domains instead of hosts
   HOST: freecodecampt.medium.com
   DOMAIN: medium.com
 
-- Better Fullscreen view.
+Main Features
+Development
+[x] Refactor into a class
+[x] Hot Reloading
+[x] Build Process
+[] Tests
 
-- Reset on new day
-- Can add current website to deliberate
-- Can see the list of websites added
-- Reduce time options for concurrent sessions
-- Different types of blocks for different websites
+Background
+[] Reset accumulated Time on new day
+
+Blocked page
+[] Refactor blocked.html
+[] Better Fullscreen view / design.
+
+ToolTip
+[] Can add and remove website list. Can quickly add current website
+[] Can see list of websites added
+
+Good to have
+Technical
+[] Not sure If i need tab created. Tab activated and tab updated might be enough
+[] Figure out tab.onReplaced works
+[] Fetch only data of current tabs.
+[] Use hosts or tomains
+[] Don't add non-gated active tabs to array. So you don't have to check for data existance.
+[] Get proper terminolofy for site, host etc
+
+Extra Features
+[] Reduce time options for concurrent sessions
+[] Different types of blocks for different kinds websites

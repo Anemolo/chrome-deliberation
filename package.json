@@ -1,0 +1,35 @@
+{
+  "name": "deliberateextension",
+  "version": "0.0.1",
+  "description": "manifest.json\r Metadata of the extension. Name, description what permissions it requires",
+  "main": "background.js",
+  "scripts": {
+    "start": "npm run clean && webpack",
+    "clean": "rimraf ./dist",
+    "build": "npm run clean && webpack --config ./webpack.prod.config.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Anemolo/chrome-deliberation.git"
+  },
+  "author": "Daniel Velasquez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Anemolo/chrome-deliberation/issues"
+  },
+  "homepage": "https://github.com/Anemolo/chrome-deliberation#readme",
+  "dependencies": {
+    "babel-loader": "^8.0.5",
+    "webpack": "^4.30.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "clean-webpack-plugin": "^2.0.2",
+    "copy-webpack-plugin": "^5.0.3",
+    "rimraf": "^2.6.3",
+    "webpack-cli": "^3.3.2",
+    "webpack-extension-reloader": "^1.0.0"
+  }
+}

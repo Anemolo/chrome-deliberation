@@ -4,9 +4,13 @@
   "description": "Helps you limit the time you spend on websites and makes you be more deliberate on hwo much tiem you spend each sessions. Subsequent sessions have less time depending on the type of website. And if you ever need more time after your limit, you'll have to wait 5 minutes until you can choose the time. ",
   "version": "0.1",
   "author": "Daniel Velasquez",
+  "browser_action": {
+    "default_title": "Deliberation",
+    "default_popup": "popup.html"
+  },
   "background": {
-    "scripts": ["utils.js", "background.js"],
+    "scripts": ["background.js"],
     "persistent": false
   },
-  "permissions": ["tabs"]
+  "permissions": ["tabs", "storage"]
 }

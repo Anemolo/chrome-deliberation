@@ -1,5 +1,3 @@
-console.log("utils", log);
-
 // function extractHostname(url) {
 //   var siteHostname;
 //   //find & remove protocol (http, ftp, etc.) and get siteHostname
@@ -28,9 +26,24 @@ console.log("utils", log);
 // const minutesToMiliseconds = minutes =>
 //   secondsToMiliseconds(minutesToSeconds(minutes));
 
+// chrome.storage.local.onChanged.addListener(function(changes, namespace) {
+//   for (var key in changes) {
+//     var storageChange = changes[key];
+//     console.log(
+//       'Storage key "%s" in namespace "%s" changed. ' +
+//         'Old value was "%s", new value is "%s".',
+//       key,
+//       namespace,
+//       storageChange.oldValue,
+//       storageChange.newValue
+//     );
+//   }
+// });
+
 let day = localStorage.getItem("date") || new Date().getDate();
 
 let sites = JSON.parse(localStorage.getItem("sites"));
+console.log("reload");
 
 if (!sites) {
   sites = {
@@ -44,12 +57,14 @@ if (!sites) {
   updateSiteStorage(sites);
 }
 
-console.log("day", day);
-let currentDate = new Date().getDate();
+let currentDate = 8;
 if (day !== currentDate) {
-  for (let i in sites) {
-    i.accumulatedTime = 0;
+  console.log(sites);
+  for (let key in sites) {
+    let site = sites[key];
+    site.accumulatedTime = 0;
   }
+  console.log(sites);
   updateSiteStorage(sites);
   localStorage.setItem("date", currentDate);
 }
@@ -68,9 +83,12 @@ function blockTab(tab) {
   const data = sites[host];
   log("should I block ->", host, "with data->", data);
   //Return if the site is not meant to be blocked or we are in a session
-  if (!data || data.sessionTotalTime) return;
+  if (!data || data.sessionTotalTime) {
+    log("NO");
+    return;
+  }
 
-  log("Blocking");
+  log("YES");
   // We only need to update the storage when the page needs to check it.
   updateSiteStorage(sites);
 
@@ -83,9 +101,79 @@ function blockTab(tab) {
   );
 }
 
+// chrome.storage.local.set({ number: 0 }, () => {
+//   log("installed with data 1");
+// });
+
+// fetch sites and then fetch sites data.
+const siteList = [];
+const sitesData = {};
+const storageData = {
+  sites: [],
+  "youtube.com": {}
+};
+
+console.log("new2");
+
+function orDefault(value, defaultValue) {
+  return value == null ? defaultValue : value;
+}
+function addSite(name, data) {
+  data = {
+    totalTime: orDefault(data.totalTime, minutesToMiliseconds(120)),
+    accumulatedTime: 0,
+    sessionTotalTime: null,
+    sessionStartTime: null
+  };
+
+  chrome.storage.local.get("sites", result => {
+    const newSites = result.sites.concat(name);
+    crhome.storage.local.set({ sites: newSites, [name]: data });
+  });
+}
+function filterItemsWithNoData(arr, data) {
+  let res = [];
+  for (var i = 0; i < arr.length; i++) {
+    const key = arr[i];
+
+    if (data[key]) continue;
+    res.push(key);
+  }
+  return res;
+}
+
+chrome.storage.onChanged.addListener(function(changes, namespace) {
+  let sitesWithNoData = [];
+  if (changes.sites) {
+    const changedSites = changes.sites.newValue;
+
+    let tempSites = changedSites;
+    sitesWithNoData = sitesWithNoData.contar(
+      filterItemsWithNoData(changedSites, sitesData)
+    );
+  }
+  log(changes);
+  // for (var key in changes) {
+  //   var storageChange = changes[key];
+  //   console.log(
+  //     'Storage key "%s" in namespace "%s" changed. ' +
+  //       'Old value was "%s", new value is "%s".',
+  //     key,
+  //     namespace,
+  //     storageChange.oldValue,
+  //     storageChange.newValue
+  //   );
+  // }
+});
+
 function timer() {
+  // chrome.storage.local.get("number", function(result) {
+  //   console.log("get value currently is " + result.number);
+  //   chrome.storage.local.set({ number: result.number + 1 });
+  //   chrome.storage.local.set({ test: { a: result.number + 1 } });
+  // });
   chrome.tabs.query({ active: true }, tabs => {
-    log("timer");
+    // log("timer");
     refreshSites();
 
     for (var i = tabs.length - 1; i > -1; i--) {

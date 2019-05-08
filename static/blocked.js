@@ -7,7 +7,6 @@ function redirect(url) {
   // Removes current extension url from history
   window.location.replace(url);
 }
-
 function init() {
   const urlParams = new URLSearchParams(window.location.search);
 
