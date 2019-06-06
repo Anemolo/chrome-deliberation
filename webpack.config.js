@@ -7,7 +7,9 @@ module.exports = {
   watch: true,
   devtool: "cheap-module-source-map",
   entry: {
-    background: "./src/background.js"
+    background: "./src/background/background.js",
+    blocked: "./src/ui/blocked/index.js",
+    popup: "./src/ui/popup/index.js"
   },
   output: {
     publicPath: ".",
@@ -25,10 +27,7 @@ module.exports = {
         test: /\.js?$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
-          options: {
-            presets: [require("@babel/preset-env")]
-          }
+          loader: "babel-loader"
         }
       }
     ]

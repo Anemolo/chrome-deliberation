@@ -4,9 +4,16 @@ function generateUpdateId() {
   return Math.floor(new Date() * Math.random());
 }
 
-export function updateGatedData(obj) {
-  obj._id = Date.now() * Math.random();
+export function updateGatedData(obj, cb) {
+  obj._updateId = Date.now() * Math.random();
   return cb(obj);
+}
+
+export function createDefaultGatedSites(arr = []) {
+  return {
+    _updateId: generateUpdateId(),
+    arr
+  };
 }
 
 export function createGatedData({ url, totalMinutes }) {

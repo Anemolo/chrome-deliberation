@@ -6,54 +6,7 @@
   </head>
 
   <body>
-    <div class="container hidden" id="blocked">
-      <header>
-        <h1 class="title">No more time left</h1>
-        <h3 class="subtitle">
-          If you really want to keep using this website click the buttom below.
-          After 5 minutes, you'll have a 5 minute window to choose how much
-          time.
-          <br /><br />
-          I won't notify you when the window is open, you'll have to check by
-          youself
-        </h3>
-      </header>
-      <div class="content">
-        <button class=" btn btn-outlined" id="blocked-moreTime">
-          See you in 4
-        </button>
-      </div>
-    </div>
-    <div class="container" id="gated">
-      <header>
-        <h1 class="title">
-          You've been gated with <span id="time-remaining"></span> minutes left.
-          <span class="time-wrapper">
-            <span class="time-label"></span>
-            <span id="time-elapsed"></span>
-            /
-            <span id="time-total"></span>
-          </span>
-        </h1>
-        <h3 class="subtitle">
-          You can only access this website if you set a duration for your
-          session. And if you have enough time left.
-          <br /><br />
-          Don't worry about leaving too little time for a next session. I'll
-          account for that and make time reccommendations.
-        </h3>
-      </header>
-      <div class="content" id="buttons-wrapper">
-        <button class="btn btn-session" id="gated-0">
-          <span id="btn-session-minutes">25</span> min
-        </button>
-        <button class="btn btn-outlined btn-session" id="gated-1">
-          <span id="btn-session-minutes">50</span> min
-        </button>
-        <!-- <button class="btn btn-outlined" id="gated-2"></button> -->
-      </div>
-    </div>
+  <div id="app"></div>
   </body>
-  <script src="./utils.js"></script>
   <script src="./blocked.js"></script>
 </html>
